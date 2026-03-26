@@ -101,6 +101,13 @@ generateBtn.addEventListener('click', () => {
 });
 
 // Stub — filled in Task 5
-copyBtn.addEventListener('click', () => {});
+copyBtn.addEventListener('click', () => {
+  const text = passwordOutput.textContent.trim();
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    copyLabel.textContent = 'Copied!';
+    setTimeout(() => { copyLabel.textContent = 'Copy'; }, 2000);
+  });
+});
 
 updateRulesSummary();
