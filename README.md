@@ -2,6 +2,8 @@
 
 A modern, browser-based password generator. No server required — open `index.html` directly in any browser.
 
+[View Application](https://lindseyjeejan.github.io/password-generator/)
+
 ## How to use
 
 1. **Set the length** — drag the slider (8–128 characters)
