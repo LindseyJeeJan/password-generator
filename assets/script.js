@@ -58,13 +58,11 @@ function updateRulesSummary() {
 }
 
 function generatePassword(activeTypes) {
-  const length = parseInt(lengthSlider.value);
+  const length = parseInt(lengthSlider.value, 10);
   const chars  = activeTypes.map(k => charSets[k]).join('');
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
+  const randomValues = new Uint32Array(length);
+  crypto.getRandomValues(randomValues);
+  return Array.from(randomValues, v => chars[v % chars.length]).join('');
 }
 
 function getStrengthScore(password, activeTypes) {
