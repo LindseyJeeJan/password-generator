@@ -46,9 +46,7 @@ function getActiveTypes() {
 
 function updateRulesSummary() {
   const active = getActiveTypes();
-  const typeLabels = { uppercase: 'uppercase', lowercase: 'lowercase', numbers: 'numbers', symbols: 'symbols' };
-  const typeParts = active.map(k => typeLabels[k]);
-  rulesSummary.textContent = [lengthSlider.value + ' chars', ...typeParts].join(' · ');
+  rulesSummary.textContent = [lengthSlider.value + ' chars', ...active].join(' · ');
 }
 
 Object.values(toggles).forEach(btn => {
