@@ -57,6 +57,13 @@ function updateRulesSummary() {
   rulesSummary.textContent = [lengthSlider.value + ' chars', ...active].join(' · ');
 }
 
+function resetOutput() {
+  passwordOutput.textContent = '';
+  copyBtn.disabled = true;
+  copyLabel.textContent = 'Copy';
+  updateStrength(0);
+}
+
 function generatePassword(activeTypes) {
   const length = parseInt(lengthSlider.value, 10);
   const chars  = activeTypes.map(k => charSets[k]).join('');
@@ -85,12 +92,14 @@ Object.values(toggles).forEach(btn => {
     const isActive = btn.getAttribute('aria-pressed') === 'true';
     setToggle(btn, !isActive);
     updateRulesSummary();
+    resetOutput();
   });
 });
 
 lengthSlider.addEventListener('input', () => {
   lengthDisplay.textContent = lengthSlider.value;
   updateRulesSummary();
+  resetOutput();
 });
 
 generateBtn.addEventListener('click', () => {
@@ -107,7 +116,6 @@ generateBtn.addEventListener('click', () => {
   updateStrength(getStrengthScore(password, active));
 });
 
-// Stub — filled in Task 5
 copyBtn.addEventListener('click', () => {
   const text = passwordOutput.textContent.trim();
   if (!text) return;
