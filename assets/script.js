@@ -104,10 +104,15 @@ generateBtn.addEventListener('click', () => {
 copyBtn.addEventListener('click', () => {
   const text = passwordOutput.textContent.trim();
   if (!text) return;
-  navigator.clipboard.writeText(text).then(() => {
-    copyLabel.textContent = 'Copied!';
-    setTimeout(() => { copyLabel.textContent = 'Copy'; }, 2000);
-  });
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      copyLabel.textContent = 'Copied!';
+      setTimeout(() => { copyLabel.textContent = 'Copy'; }, 2000);
+    })
+    .catch(() => {
+      copyLabel.textContent = 'Failed!';
+      setTimeout(() => { copyLabel.textContent = 'Copy'; }, 2000);
+    });
 });
 
 updateRulesSummary();
