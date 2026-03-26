@@ -70,8 +70,15 @@ function getStrengthScore(password, activeTypes) {
   return Math.min(activeTypes.length + lengthBonus, 4);
 }
 
-// Stub — filled in Task 5
-function updateStrength(score) {}
+function updateStrength(score) {
+  const config = STRENGTH_CONFIG[score];
+  strengthLabel.textContent = config.label;
+  strengthLabel.className = `text-xs font-semibold ${config.textClass}`;
+  strengthMeter.setAttribute('aria-valuenow', score);
+  strengthSegs.forEach((seg, i) => {
+    seg.className = `strength-seg h-1.5 flex-1 rounded-full ${i < score ? config.color : 'bg-gray-200'}`;
+  });
+}
 
 Object.values(toggles).forEach(btn => {
   btn.addEventListener('click', () => {
