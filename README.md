@@ -1,6 +1,24 @@
-Project description:
-Created an application that allows the user to input password requirements and generates a random password based on those requirements. The user may decide a minimum and maxiumum number of characters and whether or not they would like to include lowercase letters, uppercase letters, numbers or special characters. The application does error checking to make sure only valid responses are made. When the password is created and provided to the user, the password requirements they chose are also listed on the page. 
+# Password Generator
 
-[Link to deployed application](https://lindseyjeejan.github.io/password-generator/)
+A modern, browser-based password generator. No server required — open `index.html` directly in any browser.
 
+## How to use
 
+1. **Set the length** — drag the slider (8–128 characters)
+2. **Choose character types** — click the toggles to include or exclude uppercase, lowercase, numbers, and symbols. Black = active; white with strikethrough = inactive.
+3. **Click Generate Password** — a new password appears in the output box
+4. **Copy** — click the Copy button to copy to your clipboard. The label changes to "Copied!" for 2 seconds, then resets.
+
+## Features
+
+- On-page controls — no browser popups or dialogs
+- Password strength indicator (Weak / Fair / Strong / Very Strong)
+- One-click copy to clipboard
+- Semantic HTML with ARIA attributes for screen reader support
+- Responsive sidebar layout
+- Styled with Tailwind CSS (via CDN) and Inter font
+- Cryptographically secure password generation using `crypto.getRandomValues()`
+
+## Tech
+
+HTML5 · Tailwind CSS (CDN) · Vanilla JavaScript · Inter + monospace fonts (Google Fonts)
