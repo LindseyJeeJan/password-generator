@@ -1,6 +1,14 @@
 const ACTIVE_CLASSES   = ['bg-gray-900', 'text-white', 'border-gray-900'];
 const INACTIVE_CLASSES = ['bg-white', 'text-gray-500', 'border-gray-300', 'line-through', 'decoration-gray-400'];
 
+const STRENGTH_CONFIG = [
+  { label: '—',           color: 'bg-gray-200',   textClass: 'text-gray-400'    },
+  { label: 'Weak',        color: 'bg-red-400',     textClass: 'text-red-500'     },
+  { label: 'Fair',        color: 'bg-amber-400',   textClass: 'text-amber-500'   },
+  { label: 'Strong',      color: 'bg-emerald-400', textClass: 'text-emerald-600' },
+  { label: 'Very Strong', color: 'bg-emerald-500', textClass: 'text-emerald-700' },
+];
+
 const lengthSlider   = document.getElementById('length-slider');
 const lengthDisplay  = document.getElementById('length-display');
 const passwordOutput = document.getElementById('password');
@@ -49,6 +57,24 @@ function updateRulesSummary() {
   rulesSummary.textContent = [lengthSlider.value + ' chars', ...active].join(' · ');
 }
 
+function generatePassword(activeTypes) {
+  const length = parseInt(lengthSlider.value);
+  const chars  = activeTypes.map(k => charSets[k]).join('');
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
+function getStrengthScore(password, activeTypes) {
+  const lengthBonus = password.length >= 16 ? 1 : 0;
+  return Math.min(activeTypes.length + lengthBonus, 4);
+}
+
+// Stub — filled in Task 5
+function updateStrength(score) {}
+
 Object.values(toggles).forEach(btn => {
   btn.addEventListener('click', () => {
     const isActive = btn.getAttribute('aria-pressed') === 'true';
@@ -62,12 +88,21 @@ lengthSlider.addEventListener('input', () => {
   updateRulesSummary();
 });
 
-// Stubs filled in later tasks
-function generatePassword() { return null; }
-function getStrengthScore(password, activeTypes) { return 0; }
-function updateStrength(score) {}
+generateBtn.addEventListener('click', () => {
+  const active = getActiveTypes();
+  if (active.length === 0) {
+    errorMsg.classList.remove('hidden');
+    return;
+  }
+  errorMsg.classList.add('hidden');
+  const password = generatePassword(active);
+  passwordOutput.textContent = password;
+  copyBtn.disabled = false;
+  copyLabel.textContent = 'Copy';
+  updateStrength(getStrengthScore(password, active));
+});
 
-generateBtn.addEventListener('click', () => {});
+// Stub — filled in Task 5
 copyBtn.addEventListener('click', () => {});
 
 updateRulesSummary();
